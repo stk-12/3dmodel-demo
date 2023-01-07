@@ -10,7 +10,7 @@ Air Vent by J-Toastie [CC-BY] (https://creativecommons.org/licenses/by/3.0/) via
 
 
 
-let renderer, scene, camera;
+let renderer, scene, camera, object;
 
 const canvas = document.querySelector("#canvas");
 
@@ -61,8 +61,12 @@ function init(){
   // GLTFファイルのロード
   gltfLoader.load('/images/airvent.glb', (gltf) => {
     // シーンに追加
-    const model = gltf.scene;
-    scene.add(model);
+    object = gltf.scene
+    scene.add(object);
+
+    object.scale.set(200, 200, 200);
+    object.rotation.y = radian(-45);
+
   });
 
   //メッシュ
@@ -74,8 +78,9 @@ function init(){
 
   function animate(){
     //アニメーション処理
-    // mesh.rotation.y += 0.01;
-    // mesh.rotation.x += 0.01;
+    if(object) {
+      object.rotation.y += 0.01;
+    }
     
     //レンダリング
     renderer.render(scene, camera);
@@ -89,9 +94,9 @@ function init(){
 init();
 
 // ラジアンに変換
-// function radian(val) {
-//   return (val * Math.PI) / 180;
-// }
+function radian(val) {
+  return (val * Math.PI) / 180;
+}
 
 // ランダムな数
 // function random(min, max) {
