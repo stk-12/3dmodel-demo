@@ -117,9 +117,26 @@ function setGui() {
   folderRotation.add(object.rotation, 'x', -2, 2, 0.005).name('x').listen();
   folderRotation.add(object.rotation, 'y', -2, 2, 0.005).name('y').listen();
   folderRotation.add(object.rotation, 'z', -2, 2, 0.005).name('z').listen();
-  folderScale.add(object.scale, 'x', 0, 300, 1).name('x').listen();
-  folderScale.add(object.scale, 'y', 0, 300, 1).name('y').listen();
-  folderScale.add(object.scale, 'z', 0, 300, 1).name('z').listen();
+  folderScale.add(object.scale, 'x', 0, 300, 1).name('x').listen().onChange((e)=>{
+    scaleSet(e);
+  });
+  folderScale.add(object.scale, 'y', 0, 300, 1).name('y').listen().onChange((e)=>{
+    scaleSet(e);
+  });
+  folderScale.add(object.scale, 'z', 0, 300, 1).name('z').listen().onChange((e)=>{
+    scaleSet(e);
+  });
+
+  function scaleSet(e) {
+    object.scale.set(e, e, e);
+  }
+
+  // gui.onChange( event => {
+  //   event.object     // object that was modified
+  //   event.property   // string, name of property
+  //   event.value      // new value of controller
+  //   event.controller // controller that was modified
+  // } );
 }
 window.addEventListener('load', setGui);
 
