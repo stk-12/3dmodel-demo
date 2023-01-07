@@ -1,6 +1,7 @@
 import '../css/style.css'
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
+import GUI from "lil-gui";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 
 /*
@@ -102,6 +103,25 @@ function init(){
 }
 
 init();
+
+function setGui() {
+  //GUI
+  const gui = new GUI();
+  const folderPosition = gui.addFolder("Position");
+  const folderRotation = gui.addFolder("Rotation");
+  const folderScale = gui.addFolder("Scale");
+
+  folderPosition.add(object.position, 'x').name('x').listen();
+  folderPosition.add(object.position, 'y').name('y').listen();
+  folderPosition.add(object.position, 'z').name('z').listen();
+  folderRotation.add(object.rotation, 'x', -2, 2, 0.005).name('x').listen();
+  folderRotation.add(object.rotation, 'y', -2, 2, 0.005).name('y').listen();
+  folderRotation.add(object.rotation, 'z', -2, 2, 0.005).name('z').listen();
+  folderScale.add(object.scale, 'x', 0, 300, 1).name('x').listen();
+  folderScale.add(object.scale, 'y', 0, 300, 1).name('y').listen();
+  folderScale.add(object.scale, 'z', 0, 300, 1).name('z').listen();
+}
+window.addEventListener('load', setGui);
 
 // ラジアンに変換
 function radian(val) {
