@@ -5,7 +5,10 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 
 /*
 Air Vent by J-Toastie [CC-BY] (https://creativecommons.org/licenses/by/3.0/) via Poly Pizza (https://poly.pizza/m/PCqBwDkgAz)
-*/
+**/
+/*
+Laptop / MacBook Pro by Alex Safayan [CC-BY] (https://creativecommons.org/licenses/by/3.0/) via Poly Pizza (https://poly.pizza/m/27hcX_w47Jb)
+**/
 // import modelAir from "../images/airvent.glb";
 
 
@@ -64,23 +67,30 @@ function init(){
     object = gltf.scene
     scene.add(object);
 
-    object.scale.set(200, 200, 200);
-    object.rotation.y = radian(-45);
+    object.scale.set(150, 150, 150);
+    object.position.set(-200, 70, 0);
+    object.rotation.set(radian(0), radian(-90), radian(0));
 
   });
 
+  //テクスチャ
+  const texLoader = new THREE.TextureLoader();
+  const texture = texLoader.load("https://picsum.photos/id/42/1600/1000");
   //メッシュ
+  const geometry = new THREE.PlaneBufferGeometry(800, 500, 100, 100);
+  const material = new THREE.MeshBasicMaterial({ map: texture });
   // const geometry = new THREE.BoxGeometry(50, 50, 50);
   // const material = new THREE.MeshStandardMaterial({color: 0x444444});
-  // const mesh = new THREE.Mesh(geometry, material);
-  // scene.add(mesh);
+  const mesh = new THREE.Mesh(geometry, material);
+  mesh.position.z -= 100;
+  scene.add(mesh);
 
 
   function animate(){
     //アニメーション処理
-    if(object) {
-      object.rotation.y += 0.01;
-    }
+    // if(object) {
+    //   object.rotation.y += 0.01;
+    // }
     
     //レンダリング
     renderer.render(scene, camera);
